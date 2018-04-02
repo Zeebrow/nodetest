@@ -1,9 +1,10 @@
 var http = require('http').createServer(handler);
 var fs = require('fs');
+var io = require('socket.io')(http)
 
 http.listen(8080);
 
-function handler (req,res){
+function handler (req, res){
 	fs.readFile(__dirname + '/public/index.html', function(err,data) {
 		if(err){
 			res.writeHead(404, {'Content-Type': 'text/html'});
@@ -14,3 +15,14 @@ function handler (req,res){
 		return res.end();
 	});
 }
+
+io.sockets.on('connection', function (socket){
+	var lightvalue = 0;
+	socket.on('light', function(data){
+		lightvalue = data;
+		if (lightvalue) {
+			console.log(lightvalue);
+		}
+	});
+});
+

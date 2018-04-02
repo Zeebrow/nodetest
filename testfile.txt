@@ -1,5 +1,0 @@
-This is a testfile, to see if it will show up on github when committed.
-
-https://github.com/Zeebrow/nodetest
-
-changing the file
